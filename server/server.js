@@ -1,11 +1,27 @@
-const express = require("express")
-const app = express() 
+const express = require('express');
+const app = express();
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const helmet = require("helmet");
+const port = 3000;
 
-app.get("/", (req, res) => {
-    const obj = [{title:"Bem vindo"}]
-    res.send(obj)
-})
+// Importe as rotas relacionadas às avaliações
+const avaliacoesRoutes = require('./routes/avaliacaoRoutes');
 
-app.listen(3000, () => {
-    console.log("server iniciado na porta 3000")
-})
+// Parsing json objects in to js objects
+app.use(bodyParser.json());
+
+// Rest security
+app.use(helmet());
+
+// Using cors for all requets
+app.use(cors());
+
+// Use as rotas relacionadas às avaliações
+app.use(express.json()); // Para analisar o corpo da solicitação como JSON
+app.use(avaliacoesRoutes);
+
+// Iniciar o servidor
+app.listen(port, () => {
+  console.log(`Servidor rodando na porta ${port}`);
+});

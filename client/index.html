@@ -9,26 +9,28 @@
 <body>
     <header>
         <h1>Net Promoter Score (NPS)</h1>
-        <p>Deixe aqui sua aviliação </p>
+        <p>Deixe aqui sua avaliação</p>
     </header>
 
     <main>
-        <form>
+        <form id="nps-form">
             <div class="nps-form">
                 <label for="avaliador">Avaliador</label>
                 <input type="text" id="avaliador" name="avaliador" required>
-        
+
                 <label for="avaliacao">Sua avaliação 0-10</label>
                 <input type="number" id="avaliacao" name="avaliacao" min="0" max="10" required>
-        
+
                 <label for="comentarios">Comentários (opcional)</label>
                 <textarea id="comentarios" name="comentarios" rows="4"></textarea>
-        
+
                 <button type="submit">Enviar</button>
             </div>
         </form>
-        
     </main>
+    
+    <p id="mensagem" style="display: none;"></p> <!-- Mensagem de sucesso/erro oculta inicialmente -->
+    
     <script src="./index.js"></script>
 </body>
 </html>
