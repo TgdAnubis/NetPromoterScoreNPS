@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliações</title>
+</head>
+<body>
+    <h1>Avaliações</h1>
+    <table id="avaliacoes-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Avaliador</th>
+                <th>Avaliação</th>
+                <th>Comentários</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Dados da API serão inseridos aqui -->
+        </tbody>
+    </table>
+
+    <script>
+        // Função para buscar dados da API e preencher a tabela
+        async function fetchAvaliacoes() {
+            try {
+                const response = await fetch('http://localhost:3000/avaliacoes');
+                const data = await response.json();
+
+                const tableBody = document.querySelector('#avaliacoes-table tbody');
+                tableBody.innerHTML = '';
+
+                data.forEach(avaliacao => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${avaliacao.id}</td>
+                        <td>${avaliacao.avaliador}</td>
+                        <td>${avaliacao.avaliacao}</td>
+                        <td>${avaliacao.comentarios}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Erro ao buscar dados da API:', error);
+            }
+        }
+
+        // Chama a função para buscar dados da API quando a página carregar
+        window.onload = fetchAvaliacoes;
+    </script>
+</body>
+</html>
